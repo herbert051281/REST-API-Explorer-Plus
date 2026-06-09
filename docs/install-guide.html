@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ServiceNow API Explorer Plus — Install Guide</title>
+  <style>
+    :root {
+      --rsm-blue:  #009FD9;
+      --rsm-green: #00A651;
+      --rsm-gray:  #58595B;
+      --rsm-light: #F4F6F8;
+      --rsm-white: #FFFFFF;
+      --radius:    18px;
+      --gap:       14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--rsm-light);
+      color: var(--rsm-gray);
+      min-height: 100vh;
+      padding: 36px 20px 48px;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    /* ── Bento card base ── */
+    .card {
+      background: var(--rsm-white);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    /* ── Header card ── */
+    .card-header {
+      background: var(--rsm-blue);
+      color: #fff;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Recreate RSM logo mark with CSS */
+    .logo-mark {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-right: 14px;
+    }
+    .logo-mark .bar-top {
+      display: flex;
+      gap: 3px;
+    }
+    .logo-mark .sq-green {
+      width: 14px; height: 14px;
+      background: var(--rsm-green);
+      border-radius: 2px;
+    }
+    .logo-mark .sq-blue {
+      width: 28px; height: 14px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 2px;
+    }
+    .logo-mark .bar-bottom {
+      width: 42px; height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+    }
+
+    .logo-text {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .header-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+    }
+
+    .header-right h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      text-align: right;
+    }
+
+    .header-right .sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* ── Intro card ── */
+    .card-intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .card-intro .pill {
+      display: inline-block;
+      background: var(--rsm-light);
+      border: 1px solid #dde3e8;
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 12px;
+      color: var(--rsm-gray);
+      margin-top: 12px;
+      margin-right: 6px;
+    }
+
+    /* ── Bento grid for steps ── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+
+    .step-card {
+      background: var(--rsm-white);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--rsm-blue);
+    }
+
+    .step-card:nth-child(3n+2)::before { background: var(--rsm-green); }
+    .step-card:nth-child(3n+3)::before { background: var(--rsm-blue); opacity: 0.5; }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--rsm-blue);
+      margin-bottom: 8px;
+    }
+
+    .step-card:nth-child(3n+2) .step-num { color: var(--rsm-green); }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .step-body {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .step-body code {
+      background: var(--rsm-light);
+      border: 1px solid #dde3e8;
+      border-radius: 5px;
+      padding: 1px 6px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .note {
+      display: block;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #888;
+      font-style: italic;
+    }
+
+    /* Full-width step card */
+    .step-card.full {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Update card ── */
+    .card-update {
+      background: #EAF9EF;
+      border: 1px solid #b2e8c8;
+      border-radius: var(--radius);
+      padding: 22px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .card-update .icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: var(--rsm-green);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+
+    .card-update h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a5c34;
+      margin-bottom: 6px;
+    }
+
+    .card-update p {
+      font-size: 13px;
+      color: #2d6b46;
+      line-height: 1.6;
+    }
+
+    .card-update code {
+      background: rgba(0,0,0,0.07);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+    }
+
+    /* ── Usage card ── */
+    .card-usage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .usage-block h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--rsm-blue);
+      margin-bottom: 10px;
+    }
+
+    .usage-block p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ── Footer card ── */
+    .card-footer {
+      background: var(--rsm-gray);
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: var(--radius);
+    }
+
+    .card-footer strong { color: rgba(255,255,255,0.9); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="card card-header">
+    <div class="logo-block">
+      <div class="logo-mark">
+        <div class="bar-top">
+          <div class="sq-green"></div>
+          <div class="sq-blue"></div>
+        </div>
+        <div class="bar-bottom"></div>
+      </div>
+      <div>
+        <div class="logo-text">RSM</div>
+        <div class="header-tagline">Internal Tools</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <h1>ServiceNow API Explorer Plus<br/>Browser Extension</h1>
+      <div class="sub">Installation Guide</div>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="card card-intro">
+    <p>
+      <strong>ServiceNow API Explorer Plus</strong> lets you browse ServiceNow tables and fields,
+      then instantly generate Power BI–ready REST API URLs and Power Query M code — right from your browser.
+      Follow the steps below to install it in Microsoft Edge or Google Chrome.
+    </p>
+    <span class="pill">Microsoft Edge</span>
+    <span class="pill">Google Chrome</span>
+    <span class="pill">~2 minutes to install</span>
+  </div>
+
+  <!-- Steps bento grid -->
+  <div class="bento-grid">
+
+    <div class="step-card">
+      <div class="step-num">Step 1</div>
+      <div class="step-title">Sync the SharePoint folder</div>
+      <div class="step-body">
+        Open the SharePoint site in your browser, navigate to the
+        <strong>REST API Explorer Plus Extension</strong> folder, and click
+        <strong>Sync</strong> to sync it to your computer via OneDrive.
+        <span class="note">Only needed once. OneDrive keeps the folder current automatically.</span>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Step 2</div>
+      <div class="step-title">Find the synced folder</div>
+      <div class="step-body">
+        After syncing, the folder appears in File Explorer under:<br/>
+        <code>RSM → Customer Success - Project &amp; Document Templates and Wiki → REST API Explorer Plus Extension</code>
+        <span class="note">This is the folder you'll point your browser at — never move or rename it.</span>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Step 3</div>
+      <div class="step-title">Open the Extensions page</div>
+      <div class="step-body">
+        <strong>Edge:</strong> type <code>edge://extensions</code> in the address bar and press Enter.<br/><br/>
+        <strong>Chrome:</strong> type <code>chrome://extensions</code> instead.
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Step 4</div>
+      <div class="step-title">Enable Developer Mode</div>
+      <div class="step-body">
+        In the top-right corner of the Extensions page, toggle <strong>Developer mode</strong> on.
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Step 5</div>
+      <div class="step-title">Load the extension</div>
+      <div class="step-body">
+        Click <strong>Load unpacked</strong>, then select the synced folder from Step 2.
+        The extension appears as <em>ServiceNow API Explorer Plus</em>.
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Step 6</div>
+      <div class="step-title">Pin to your toolbar</div>
+      <div class="step-body">
+        Click the puzzle-piece 🧩 icon in your toolbar, find <em>API Explorer Plus</em>, and click the pin so it stays visible.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Update notice -->
+  <div class="card-update">
+    <div class="icon">↺</div>
+    <div>
+      <h3>Getting updates — no download needed</h3>
+      <p>
+        When a new version is released, OneDrive syncs the updated files to your computer automatically.
+        Just go to <code>edge://extensions</code> (or <code>chrome://extensions</code>),
+        find <em>ServiceNow API Explorer Plus</em>, and click the reload ↺ icon.
+        That's it — no unzipping, no re-installing.
+      </p>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="card">
+    <div class="card-usage">
+      <div class="usage-block">
+        <h3>How to use</h3>
+        <p>
+          Navigate to any ServiceNow list, form, or report page, then click the
+          <strong>API Explorer Plus</strong> icon in your browser toolbar.
+          The panel auto-detects the current table and fields.
+        </p>
+      </div>
+      <div class="usage-block">
+        <h3>Output options</h3>
+        <p>
+          Use the <strong>REST API URL</strong> tab to copy the endpoint for direct use,
+          or the <strong>Power Query M</strong> tab to copy syntax-highlighted M code
+          ready to paste into Power BI's Advanced Editor.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="card-footer">
+    <strong>RSM US LLP</strong> &nbsp;·&nbsp; Internal Use Only &nbsp;·&nbsp; Not for external distribution
+  </div>
+
+</div>
+</body>
+</html>

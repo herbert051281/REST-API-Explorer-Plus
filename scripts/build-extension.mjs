@@ -16,6 +16,11 @@ import { deflateSync } from 'node:zlib';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// SharePoint folder synced via OneDrive for Business.
+// Teammates point "Load unpacked" at their own synced copy of this folder.
+const SHAREPOINT_DEPLOY_PATH =
+  'C:\\Users\\E112671\\RSM\\Customer Success - Project & Document Templates and Wiki\\REST API Explorer Plus Extension';
+
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // ── Minimal PNG encoder ────────────────────────────────────────────────────────
@@ -132,6 +137,15 @@ execSync(
   { cwd: root, stdio: 'inherit' }
 );
 
+console.log('⑤ Deploying to SharePoint (OneDrive sync)…');
+try {
+  cpSync(join(root, 'extension'), SHAREPOINT_DEPLOY_PATH, { recursive: true });
+  console.log(`   Copied → ${SHAREPOINT_DEPLOY_PATH}`);
+} catch (err) {
+  console.warn(`   ⚠ Deploy skipped: ${err.message}`);
+  console.warn('   (Is the OneDrive folder accessible? Run "npm run deploy" manually when it is.)');
+}
+
 console.log('\n✅ Done!');
-console.log('   extension/      — load this folder in edge://extensions (Developer mode → Load unpacked)');
-console.log('   extension.zip   — submit to Edge Add-ons store or give to IT for Group Policy deployment');
+console.log('   extension/               — local copy');
+console.log('   SharePoint/OneDrive      — teammates reload their extension to pick up changes');
