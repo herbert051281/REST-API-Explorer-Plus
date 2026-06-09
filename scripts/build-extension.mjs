@@ -11,7 +11,7 @@
  */
 
 import { execSync } from 'node:child_process';
-import { cpSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, copyFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -140,7 +140,9 @@ execSync(
 console.log('⑤ Deploying to SharePoint (OneDrive sync)…');
 try {
   cpSync(join(root, 'extension'), SHAREPOINT_DEPLOY_PATH, { recursive: true });
-  console.log(`   Copied → ${SHAREPOINT_DEPLOY_PATH}`);
+  console.log(`   extension/  → ${SHAREPOINT_DEPLOY_PATH}`);
+  copyFileSync(join(root, 'docs', 'install-guide.html'), join(SHAREPOINT_DEPLOY_PATH, 'install-guide.html'));
+  console.log(`   install-guide.html → ${SHAREPOINT_DEPLOY_PATH}`);
 } catch (err) {
   console.warn(`   ⚠ Deploy skipped: ${err.message}`);
   console.warn('   (Is the OneDrive folder accessible? Run "npm run deploy" manually when it is.)');
