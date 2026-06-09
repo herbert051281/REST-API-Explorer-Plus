@@ -67,3 +67,62 @@ For browser-based testing from localhost, you would need to add a Vite proxy in 
 ## Instance
 
 User's ServiceNow test instance: `rsmntest.service-now.com`
+
+---
+
+## Coding Lessons Learned
+
+### 1. Escape string literals in generated code
+
+When building Power Query M (or any code-as-string output), always escape special characters before interpolating API or user data. In M, double-quote is escaped as `""`:
+
+```js
+lbl.replace(/"/g, '""')
+```
+
+A label like `System "Admin" Name` produced invalid M code that Power BI silently refused to parse. Any value interpolated into a generated code string (M, SQL, JSON) must be escaped for the target language.
+
+---
+
+### 2. Wire up every DOM element you create
+
+After creating a wrapper with `el()`, immediately write the `appendChild` chain — don't defer it. A `flistWrap` variable was created but never appended, so its `flex:1;overflow-y:auto` never applied and the live preview bar scrolled out of view instead of staying sticky.
+
+```js
+// Correct pattern — wire it all in one pass
+var wrap = el('div', { style: 'flex:1;overflow-y:auto;min-height:0' });
+wrap.appendChild(el('div', { id: '...' }));
+body.appendChild(wrap);
+body.appendChild(footer);
+```
+
+---
+
+### 3. Always `.catch()` browser API calls
+
+`navigator.clipboard.writeText()` rejects when the page loses focus (normal when switching tabs to paste). Without `.catch()` the button silently does nothing. All clipboard and permission API calls must chain an error handler that shows visible feedback.
+
+---
+
+### 4. Document API parameter differences between sibling outputs
+
+`buildMCode()` used `sysparm_display_value=true` (flat strings) while `buildUrl()` used `sysparm_display_value=all` (nested `{value, display_value}` objects). Both looked correct in code but produced incompatible shapes. When two code paths hit the same API with different params, add a UI note and a comment at both call sites explaining why they differ.
+
+---
+
+### 5. Token pattern for async search — discard stale responses
+
+Any fetch triggered from a user input event must guard against out-of-order responses:
+
+```js
+let gfToken = 0;
+function runGfSearch(term) {
+  var token = ++gfToken;
+  snowFetch(...).then(function(data) {
+    if (token !== gfToken) return; // discard stale
+    // update state
+  });
+}
+```
+
+Debouncing reduces frequency but doesn't eliminate races on slow networks. The token variable lives in the same scope as the state it protects.

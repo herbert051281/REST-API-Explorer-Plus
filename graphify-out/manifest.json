@@ -1,0 +1,207 @@
+{
+  "C:\\CS Projects\\REST API Explorer Plus\\eslint.config.js": {
+    "mtime": 1780669738.4276767,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": "0355276bc79439afe3c53e3a2470ca1e"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\package.json": {
+    "mtime": 1780697781.429124,
+    "ast_hash": "eff88a44e4cc2191279e3ad48df59366",
+    "semantic_hash": "eff88a44e4cc2191279e3ad48df59366"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\postcss.config.js": {
+    "mtime": 1780669793.7545364,
+    "ast_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0",
+    "semantic_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\tailwind.config.js": {
+    "mtime": 1780669808.0048122,
+    "ast_hash": "55059e284382650796cccd343eb9d65f",
+    "semantic_hash": "55059e284382650796cccd343eb9d65f"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\take-screenshot.mjs": {
+    "mtime": 1780670593.3959713,
+    "ast_hash": "827268e11074222f42f8cfefc567b64a",
+    "semantic_hash": "827268e11074222f42f8cfefc567b64a"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\tsconfig.app.json": {
+    "mtime": 1780669738.5132542,
+    "ast_hash": "136630b5accce1ca50663df229534a26",
+    "semantic_hash": "136630b5accce1ca50663df229534a26"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\tsconfig.json": {
+    "mtime": 1780669738.5288122,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\tsconfig.node.json": {
+    "mtime": 1780669738.5436828,
+    "ast_hash": "70bdd0a673bcfc0e828080b306e7c680",
+    "semantic_hash": "70bdd0a673bcfc0e828080b306e7c680"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\vite.config.ts": {
+    "mtime": 1780673589.8502743,
+    "ast_hash": "ed119af4bac6bf86a65c1acf883bdd92",
+    "semantic_hash": "ed119af4bac6bf86a65c1acf883bdd92"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\.claude\\settings.json": {
+    "mtime": 1780976974.2509258,
+    "ast_hash": "5d6ecd96cf065b16e8bb9fbf5d7d8f0d",
+    "semantic_hash": "5d6ecd96cf065b16e8bb9fbf5d7d8f0d"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\background.js": {
+    "mtime": 1780689464.7114263,
+    "ast_hash": "b0a4054e4b788381938f71dab4e17413",
+    "semantic_hash": "b0a4054e4b788381938f71dab4e17413"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\bookmarklet.min.js": {
+    "mtime": 1780975547.9446194,
+    "ast_hash": "62d978690d55647bf25c27272916ac23",
+    "semantic_hash": "62d978690d55647bf25c27272916ac23"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\manifest.json": {
+    "mtime": 1780689458.1101704,
+    "ast_hash": "7cf45d506255f042673a889c0c791153",
+    "semantic_hash": "7cf45d506255f042673a889c0c791153"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\public\\bookmarklet.js": {
+    "mtime": 1780975540.684469,
+    "ast_hash": "535bed99dfdd1bacf90a6b8d2dc8eca0",
+    "semantic_hash": "535bed99dfdd1bacf90a6b8d2dc8eca0"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\public\\bookmarklet.min.js": {
+    "mtime": 1780975547.9446194,
+    "ast_hash": "62d978690d55647bf25c27272916ac23",
+    "semantic_hash": "62d978690d55647bf25c27272916ac23"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\scripts\\build-extension.mjs": {
+    "mtime": 1780689496.5421805,
+    "ast_hash": "605316ae903d54bfee0a964294b52be0",
+    "semantic_hash": "605316ae903d54bfee0a964294b52be0"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\App.tsx": {
+    "mtime": 1780675856.087289,
+    "ast_hash": "e5912d5650d167f8c853a28127967b53",
+    "semantic_hash": "e5912d5650d167f8c853a28127967b53"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\main.tsx": {
+    "mtime": 1780669738.9397252,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\components\\BookmarkletPage.tsx": {
+    "mtime": 1780676168.1003585,
+    "ast_hash": "6f432c591bca24dd08b766c7f80f09bb",
+    "semantic_hash": "6f432c591bca24dd08b766c7f80f09bb"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\components\\ConnectionPanel.tsx": {
+    "mtime": 1780674323.8812742,
+    "ast_hash": "ae0f7bbf23bd2f9d528ce849c688fa4b",
+    "semantic_hash": "ae0f7bbf23bd2f9d528ce849c688fa4b"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\components\\FieldExplorer.tsx": {
+    "mtime": 1780697832.9072597,
+    "ast_hash": "8b9aa9bd70579c9047ed09270baf7df2",
+    "semantic_hash": "8b9aa9bd70579c9047ed09270baf7df2"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\components\\PowerBIUrlBuilder.tsx": {
+    "mtime": 1780686671.1886568,
+    "ast_hash": "aaf4c0ceb21e019990de9fff729aaeb0",
+    "semantic_hash": "aaf4c0ceb21e019990de9fff729aaeb0"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\components\\TableBrowser.tsx": {
+    "mtime": 1780669920.5313823,
+    "ast_hash": "61e4b78f3923d9640cf5823aae4a3742",
+    "semantic_hash": "61e4b78f3923d9640cf5823aae4a3742"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\hooks\\useServiceNow.ts": {
+    "mtime": 1780678213.3955958,
+    "ast_hash": "ef29eb7aa9a8e0be65b85898de7e9944",
+    "semantic_hash": "ef29eb7aa9a8e0be65b85898de7e9944"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\types\\servicenow.ts": {
+    "mtime": 1780674274.423198,
+    "ast_hash": "6fb2ab4483659de0e3d9bbbcbc6b19c7",
+    "semantic_hash": "6fb2ab4483659de0e3d9bbbcbc6b19c7"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\utils\\urlBuilder.ts": {
+    "mtime": 1780697822.395031,
+    "ast_hash": "d886292f280e504ca76be6a73f040225",
+    "semantic_hash": "d886292f280e504ca76be6a73f040225"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\tests\\bookmarklet-detect.test.mjs": {
+    "mtime": 1780697781.432643,
+    "ast_hash": "c54f4bed4984271f4d591c3663aa0352",
+    "semantic_hash": "c54f4bed4984271f4d591c3663aa0352"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\CLAUDE.md": {
+    "mtime": 1780976974.247923,
+    "ast_hash": "ed70d0db8b5434b6734d367ac9ed72d8",
+    "semantic_hash": "ed70d0db8b5434b6734d367ac9ed72d8"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\index.html": {
+    "mtime": 1780669739.2396584,
+    "ast_hash": "25b2d0f6762b5c0f1a1348c5d3a5f862",
+    "semantic_hash": "25b2d0f6762b5c0f1a1348c5d3a5f862"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\MEMORY.md": {
+    "mtime": 1780976238.7439795,
+    "ast_hash": "0a603fe95386ab0a403edabd02117b27",
+    "semantic_hash": "0a603fe95386ab0a403edabd02117b27"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\privacy-policy.html": {
+    "mtime": 1780972070.4479644,
+    "ast_hash": "f99e971b66e7c0f9243656faa975de93",
+    "semantic_hash": "f99e971b66e7c0f9243656faa975de93"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\README.md": {
+    "mtime": 1780669738.5810237,
+    "ast_hash": "f6e3faf55d738cf2affe1b44195f27cf",
+    "semantic_hash": "f6e3faf55d738cf2affe1b44195f27cf"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\public\\bookmarklet-url.txt": {
+    "mtime": 1780677780.763157,
+    "ast_hash": "160e60fa99fbf7a7982e3d92eca384c5",
+    "semantic_hash": "160e60fa99fbf7a7982e3d92eca384c5"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\icons\\icon128.png": {
+    "mtime": 1780975548.0078478,
+    "ast_hash": "a71937492363819fcff0f5ff8c0aaa4b",
+    "semantic_hash": "a71937492363819fcff0f5ff8c0aaa4b"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\icons\\icon16.png": {
+    "mtime": 1780975548.0003426,
+    "ast_hash": "227f0db2616f30637e6d29dd9d049401",
+    "semantic_hash": "227f0db2616f30637e6d29dd9d049401"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\extension\\icons\\icon48.png": {
+    "mtime": 1780975548.003343,
+    "ast_hash": "d17c91187be42e7f4a9c29d9032373f3",
+    "semantic_hash": "d17c91187be42e7f4a9c29d9032373f3"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\public\\favicon.svg": {
+    "mtime": 1780669738.7088726,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\public\\icons.svg": {
+    "mtime": 1780669738.7601955,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\assets\\hero.png": {
+    "mtime": 1780669738.6357436,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\assets\\react.svg": {
+    "mtime": 1780669738.8094606,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "C:\\CS Projects\\REST API Explorer Plus\\src\\assets\\vite.svg": {
+    "mtime": 1780669738.8546028,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  }
+}
