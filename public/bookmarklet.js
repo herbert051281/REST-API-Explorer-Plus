@@ -189,6 +189,25 @@
     return t;
   }
 
+  function extractSysparmQueryFromUrl(url) {
+    var m = url.match(/[?&]sysparm_query=([^&]*)/i);
+    if (!m) return '';
+    try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+  }
+
+  // Reads the active list filter from the page, preferring the live
+  // g_list query (reflects condition-builder changes), then the URL,
+  // falling back to '' if neither is available.
+  function extractListSysparmQuery(ctx) {
+    try {
+      if (ctx.frameWin.g_list && typeof ctx.frameWin.g_list.getQueryString === 'function') {
+        var q = ctx.frameWin.g_list.getQueryString();
+        if (q) return q;
+      }
+    } catch (e) {}
+    return extractSysparmQueryFromUrl(ctx.frameSrc) || extractSysparmQueryFromUrl(location.href);
+  }
+
   function runDetection() {
     detectStatus = 'detecting'; detectMsg = 'Scanning page…';
     renderDetectBanner();
@@ -208,6 +227,8 @@
 
     if (!tableName) tableName = extractTableFromUrl(ctx.frameSrc) || extractTableFromUrl(location.href);
 
+    var listQuery = extractListSysparmQuery(ctx);
+
     try { if (ctx.frameWin.g_form && ctx.frameWin.g_form._fields) Object.keys(ctx.frameWin.g_form._fields).forEach(pushField); } catch (e) {}
 
     try {
@@ -225,11 +246,12 @@
       snowFetch('/api/now/table/sys_report?sysparm_query=sys_id=' + reportId + '&sysparm_limit=1')
         .then(function (data) {
           var rpt = (data.result || [])[0];
-          if (!rpt) { finishDetection(tableName, fieldNames, ''); return; }
+          if (!rpt) { finishDetection(tableName, fieldNames, '', listQuery); return; }
 
           function strVal(v) { return v ? (typeof v === 'object' ? (v.value || '') : String(v)) : ''; }
           var rptTable = strVal(rpt.table) || tableName;
           var rptTitle = strVal(rpt.title) || '';
+          var rptQuery = listQuery || strVal(rpt.filter);
 
           var SKIP = { 'true': 1, 'false': 1, 'sys_id': 1, 'none': 1, 'asc': 1, 'desc': 1 };
           var REPORT_TYPES = { 'bar': 1, 'pie': 1, 'list': 1, 'trend': 1, 'line': 1, 'area': 1,
@@ -267,21 +289,22 @@
           var mergedFields = apiFields.slice();
           fieldNames.forEach(function (f) { if (mergedFields.indexOf(f) === -1) mergedFields.push(f); });
 
-          finishDetection(rptTable, mergedFields, rptTitle ? 'Report: ' + rptTitle : '');
+          finishDetection(rptTable, mergedFields, rptTitle ? 'Report: ' + rptTitle : '', rptQuery);
         })
-        .catch(function () { finishDetection(tableName, fieldNames, ''); });
+        .catch(function () { finishDetection(tableName, fieldNames, '', listQuery); });
     } else {
-      finishDetection(tableName, fieldNames, '');
+      finishDetection(tableName, fieldNames, '', listQuery);
     }
   }
 
-  function finishDetection(tableName, fieldNames, hint) {
+  function finishDetection(tableName, fieldNames, hint, query) {
     if (!tableName) {
       detectStatus = 'none';
       detectMsg = 'No ServiceNow table detected. Open a list, form, or report first.';
       view = 'tables'; fullRender();
       return;
     }
+    if (!sysparmQuery && query) sysparmQuery = query;
     var tbl = tables.find(function (t) { return t.name === tableName; }) || { name: tableName, label: tableName };
     var fCount = fieldNames.length;
     detectStatus = 'found';
