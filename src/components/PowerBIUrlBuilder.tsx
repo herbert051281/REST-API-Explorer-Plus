@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Connection, SysDbObject, SysDictField } from '../types/servicenow';
 import { buildApiUrl, buildMCode } from '../utils/urlBuilder';
 import CopyButton from './CopyButton';
+import MCodeBlock from './MCodeBlock';
 
 interface Props {
   connection: Connection;
@@ -135,14 +136,11 @@ export default function PowerBIUrlBuilder({ connection, table, selectedFields, o
 
         {activeTab === 'mcode' && (
           <>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-xs text-slate-500">
-                In Power BI Desktop: <strong>Home → Transform Data → New Source → Blank Query → Advanced Editor</strong>
-              </p>
-              <CopyButton text={mCode} label="Copy M Code" />
-            </div>
-            <div className="flex-1 bg-slate-900 rounded-lg p-4 overflow-auto scrollbar-thin">
-              <pre className="code-block text-slate-200 text-xs leading-relaxed">{mCode}</pre>
+            <p className="text-xs text-slate-500 mb-2">
+              In Power BI Desktop: <strong>Home → Transform Data → New Source → Blank Query → Advanced Editor</strong>
+            </p>
+            <div className="flex-1 min-h-0">
+              <MCodeBlock code={mCode} />
             </div>
             <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded text-xs text-amber-800">
               <strong>Authentication note:</strong> Power BI will prompt for credentials when you first run this query.
