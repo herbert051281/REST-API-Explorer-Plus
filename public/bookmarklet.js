@@ -393,6 +393,37 @@
     L.push('    #"Renamed Columns"');
     return L.join('\r\n');
   }
+  function highlightMCode(code) {
+    var RULES = [
+      ['named-step', /^#"[^"]*"/],
+      ['string',     /^"[^"]*"/],
+      ['keyword',    /^(?:let|in)(?![A-Za-z0-9_])/],
+      ['fn',         /^[A-Za-z][A-Za-z0-9]*\.[A-Za-z][A-Za-z0-9]*/],
+      ['open',       /^[({[]/],
+      ['close',      /^[)}\]]/],
+      ['plain',      /^[\s\S]/],
+    ];
+    var BC = ['#FFD700', '#DA70D6', '#87CEEB'];
+    var COL = { 'keyword': '#569CD6', 'named-step': '#9CDCFE', 'string': '#CE9178', 'fn': '#DCDCAA' };
+    var frag = document.createDocumentFragment();
+    var pos = 0, depth = 0;
+    while (pos < code.length) {
+      var slice = code.slice(pos);
+      for (var ri = 0; ri < RULES.length; ri++) {
+        var type = RULES[ri][0], m = RULES[ri][1].exec(slice);
+        if (!m) continue;
+        var span = document.createElement('span');
+        span.textContent = m[0];
+        if (type === 'open') { span.style.color = BC[depth % 3]; depth++; }
+        else if (type === 'close') { depth = Math.max(0, depth - 1); span.style.color = BC[depth % 3]; }
+        else { span.style.color = COL[type] || '#D4D4D4'; }
+        frag.appendChild(span);
+        pos += m[0].length;
+        break;
+      }
+    }
+    return frag;
+  }
 
   // ── Bulk add ───────────────────────────────────────────────────────────────
   function bulkAddFields(raw) {
@@ -1002,12 +1033,14 @@
         el('code', { style: 'font-size:10.5px' }, ['{value, display_value}']), ' object, not a flat string. ',
         'Use the Power Query M tab for columns ready to load into Power BI.',
       ]));
-      body.appendChild(el('div', { id: '__snx_mqcode__', className: '__snx_code' }, [urlTabActive ? buildUrl() : buildMCode()]));
+      var codeDiv = el('div', { id: '__snx_mqcode__', className: '__snx_code' });
+      if (urlTabActive) { codeDiv.textContent = buildUrl(); } else { codeDiv.appendChild(highlightMCode(buildMCode())); }
+      body.appendChild(codeDiv);
     }
 
     function refreshMqCode() {
       var c = document.getElementById('__snx_mqcode__');
-      if (c) c.textContent = urlTabActive ? buildUrl() : buildMCode();
+      if (c) { if (urlTabActive) { c.textContent = buildUrl(); } else { c.innerHTML = ''; c.appendChild(highlightMCode(buildMCode())); } }
       var note = document.getElementById('__snx_urlnote__');
       if (note) note.style.display = urlTabActive ? '' : 'none';
       var tabs = panel.querySelectorAll('.__snx_tab');
