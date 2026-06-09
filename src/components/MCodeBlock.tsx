@@ -13,6 +13,7 @@ export default function MCodeBlock({ code }: { code: string }) {
       <div className="flex-1 bg-slate-900 overflow-auto p-4">
         <pre className="text-xs leading-relaxed font-mono whitespace-pre">
           {tokens.map((token, i) => (
+            // eslint-disable-next-line react/no-array-index-key
             <span key={i} style={{ color: colorForToken(token) }}>
               {token.text}
             </span>
