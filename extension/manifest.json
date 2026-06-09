@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "ServiceNow API Explorer Plus",
+  "version": "1.0.0",
+  "description": "Browse ServiceNow tables and fields, build Power BI-ready REST API URLs with dot-walking support.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "API Explorer Plus — click while on ServiceNow"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
