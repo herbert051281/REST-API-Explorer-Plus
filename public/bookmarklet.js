@@ -665,6 +665,7 @@
 
     // Body + loading
     '.__snx_body{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-height:0;background:#f8fafc}',
+    '.__snx_attrib{padding:4px 10px;text-align:right;font-size:10px;color:#94a3b8;background:#0f172a;flex-shrink:0;letter-spacing:.01em}',
     '.__snx_loading{flex:1;display:flex;align-items:center;justify-content:center;color:#94a3b8;gap:10px;font-size:13px}',
     '.__snx_spin{width:18px;height:18px;border:2px solid #e2e8f0;border-top-color:#0ea5e9;border-radius:50%;animation:__snx_spin .7s linear infinite;flex-shrink:0}',
     '@keyframes __snx_spin{to{transform:rotate(360deg)}}',
@@ -873,6 +874,7 @@
 
     var body = el('div', { className: '__snx_body' });
     panel.appendChild(body);
+    panel.appendChild(el('div', { className: '__snx_attrib' }, ['Built by Herbert Dubón']));
 
     if (view === 'loading') { body.appendChild(el('div', { className: '__snx_loading' }, [el('div', { className: '__snx_spin' }), 'Loading…'])); return; }
 
