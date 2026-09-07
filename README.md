@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# REST API Explorer Plus
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Turns the ServiceNow REST API into Power BI-ready queries — without the sys_ids.**
 
-Currently, two official plugins are available:
+ServiceNow's own REST API Explorer answers in machine language: tables come back as
+`cmn_department`, reference fields come back as 32-character `sys_id` values. If you're
+building a Power BI model on top of that, you spend the first hour translating before you
+can write a single query.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This tool does the translation. Browse tables by their display label, map technical field
+names to the labels users recognize, and generate the URL — or the Power Query M code —
+with `sysparm_display_value=all` already configured.
 
-## React Compiler
+![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![react](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![typescript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![powerbi](https://img.shields.io/badge/Power%20BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## What it does
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Browse tables by display label** — reads `sys_db_object`, shows you human names
+- **Explore fields** — reads `sys_dictionary`, maps technical name → label → type
+- **Generate the query** — outputs a ready REST URL *and* a Power Query M snippet,
+  with display-value parameters pre-set
+- **Copy and go** — paste straight into Power BI Desktop
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## How it works
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+ConnectionPanel ──► fetchTables (sys_db_object)
+                        │
+                        ▼
+                  TableBrowser ──► fetchFields (sys_dictionary)
+                                        │
+                                        ▼
+                                  FieldExplorer
+                                        │
+                                        ▼
+                                PowerBIUrlBuilder ──► REST URL │ Power Query M
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Stack** — React 18 · TypeScript · Vite · Tailwind CSS · Axios · Vitest
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Running it
+
+```bash
+git clone https://github.com/herbert051281/REST-API-Explorer-Plus.git
+cd REST-API-Explorer-Plus
+npm install
+npm run dev     # http://localhost:5173
 ```
+
+A browser extension build lives in `extension/` — load it unpacked via
+`chrome://extensions` → Developer mode → Load unpacked.
+
+> **On CORS:** a browser can't call a ServiceNow instance directly from localhost.
+> That's fine for the intended use — Power BI Desktop isn't a browser and has no CORS
+> restriction, so the generated M code runs without issue. The extension build exists
+> for the cases where you do want to explore live from the browser.
+
+---
+
+## Why I built it
+
+I build reporting layers over enterprise systems. ServiceNow is one of the systems where
+the gap between "the API returns data" and "the model is usable" is widest, and it's a gap
+you cross by hand every single time. This closes it once.
+
+---
+
+## License
+
+MIT
